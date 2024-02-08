@@ -23,6 +23,15 @@ function createGrid(size) {
             const cell = document.createElement('div');
             // Aggiungo la classe si stilizzazione
             cell.classList.add('cell');
+            
+            // Aggiungo un classe che cambia il
+            // colore della cella al click
+            cell.addEventListener('click', function(){
+                this.classList.toggle('active')
+                // Scrivo il click in console
+                console.log(this)
+            })
+
             // Inserisco la cella nella griglia
             gridContainer.appendChild(cell);
         }
