@@ -1,28 +1,13 @@
-/*
-L'utente clicca su un bottone che
-genererà una griglia di gioco quadrata.
-Ogni cella ha un numero progressivo, da 1 a 100.
-Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-Quando l'utente clicca su ogni cella,
-la cella cliccata si colora di azzurro
-ed emetto un messaggio in console con il numero della cella cliccata.
-*/
-
-
 // Dichiaro il contenitore della griglia
-const gridContainer = document.getElementById("container-grid");
+const gridContainer = document.getElementById('gridContainer');
 
 // Dichiaro il bottone che creerà la griglia
-const createGrid = document.getElementById("create-grid");
+const createGridButton = document.getElementById('create-grid-button');
 
-// Dichiaro il menu a discesa che selezionerà la dimensione della griglia
-const sizesGrid = document.getElementById("sizes-grid");
+// Dichiaro il menu a discesa che selezionerà la dimenzione della griglia
+const gridSizeSelect = document.getElementById('sizes-grid');
 
-// Creo una funzione che genererà la griglia al click del bottone
-// Inoltre do una variabile a cui la funzione deve
-// far riferimento
-
-function creaGriglia(size){
+function createGrid(size) {
     // Svuoto il contenitore della griglia da 
     // eventuali elementi precedenti indesiderati
     gridContainer.innerHTML = '';
@@ -31,19 +16,31 @@ function creaGriglia(size){
     // all'interno della griglia
 
     // Il primo servirà per le righe
-    for(let i = 0; i < size; i++){
+    for (let i = 0; i < size; i++) {
         // Il secondo per le colonne
-        for(let j = 0; j < size; j++){
+        for (let j = 0; j < size; j++) {
             // Creo la cella
-            const cell = document.createElement("div");
-            // aggiungo una classe di stilizzazione
-            cell.classList.add("cell");
-            // inserisco la cella alla griglia
-            gridContainer.append(cell);
+            const cell = document.createElement('div');
+            // Aggiungo la classe si stilizzazione
+            cell.classList.add('cell');
+            // Inserisco la cella nella griglia
+            gridContainer.appendChild(cell);
         }
-        // aggiungo un <br> per far si che la riga 
-        // successiva sia sotto la precedente e non accanto
-        const aCapo = document.createElement("br");
+        // Aggiungo un <br> per far si che la riga
+        // successiva sia sotto la precendente
+        const aCapo = document.createElement('br');
         gridContainer.appendChild(aCapo);
     }
 }
+
+// Creo l'event listener che richiamerà la funzione
+createGridButton.addEventListener('click', function() {
+    // Dichiaro la variabile "size" che sta dentro
+    // la funzione "createGrid"
+    const gridSize = parseInt(gridSizeSelect.value);
+    if (!isNaN(gridSize) && gridSize > 0) {
+        createGrid(gridSize);
+    } else {
+        alert('Seleziona una dimensione valida!');
+    }
+});
